@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CATARSIS — кейс: сайт-журнал для жіночого клубу</title>
+<meta name="description" content="Концепт-проєкт: сайт жіночого освітнього клубу у форматі глянцевого журналу. Ідея, айдентика, механіки та технічні рішення.">
+<meta property="og:title" content="CATARSIS — сайт-журнал для жіночого клубу">
+<meta property="og:description" content="Концепт-проєкт: обкладинка, зміст, розвороти, монета SI-POINTS і таємний поверх.">
+<meta property="og:image" content="img/cover-d.jpg">
+<meta name="theme-color" content="#ECE3D6">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&display=swap">
+<style>
+/* Кейс у мові самого журналу, але тихіше: тут розповідь, а не вистава */
+:root{
+  --paper:#ECE3D6;--paper-2:#E2D6C5;--ink:#1B1716;--ink-2:#5F5550;
+  --green:#2F3328;--wine:#4A1320;--cream:#EFE6DA;--line:rgba(27,23,22,.2);
+  --serif:"Playfair Display","Bodoni Moda",Didot,"Times New Roman",serif;
+  --sans:"Manrope","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans)}
+a{color:inherit}
+:focus-visible{outline:1px solid currentColor;outline-offset:4px}
+img{display:block;max-width:100%;height:auto}
+p,li{text-wrap:pretty}
+h1,h2,h3{text-wrap:balance;font-weight:400}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.cap{font:500 11px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase}
+
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:18px;border-bottom:1px solid var(--line)}
+.top .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:400 20px/1 var(--serif);letter-spacing:.14em}
+.top .brand img{width:26px;height:auto}
+.top a.cap{text-decoration:none}
+
+.hero{padding-block:36px 48px}
+.hero h1{font:400 clamp(58px,15vw,190px)/.86 var(--serif);letter-spacing:-.04em;color:var(--wine);margin:0 0 26px;margin-left:-.04em}
+.hero .lead{font:400 clamp(21px,2.6vw,30px)/1.3 var(--serif);max-width:30ch;margin:0 0 30px}
+.btns{display:flex;flex-direction:column;gap:12px}
+.btn{display:flex;justify-content:center;align-items:center;text-decoration:none;padding:18px 26px;font:500 13px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.btn-main{background:var(--wine);color:var(--cream)}
+.btn-main:hover{background:#5E1A2A}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:40px 0 0;border-top:1px solid var(--ink)}
+.facts div{padding:14px 12px 14px 0;border-bottom:1px solid var(--line)}
+.facts dt{opacity:.65}
+.facts dd{margin:4px 0 0;font:400 19px/1.3 var(--serif)}
+.shot{margin:44px 0 0}
+.shot img{box-shadow:0 30px 60px rgba(27,23,22,.18)}
+
+section{padding-block:60px;border-top:1px solid var(--line)}
+.sec{display:grid;gap:24px}
+.sec-head .cap{display:block;color:var(--wine);margin-bottom:12px}
+.sec-head h2{font:400 clamp(34px,6vw,58px)/1 var(--serif);letter-spacing:-.02em;margin:0}
+.sec-head h2 em{font-style:italic}
+.body{min-width:0;max-width:66ch}
+.body p{margin:0 0 16px}
+.body ul{margin:0 0 16px;padding-left:20px}
+.body li{margin:7px 0}
+.big{font:400 clamp(22px,3vw,30px)/1.35 var(--serif);margin:0 0 20px}
+figure{margin:28px 0 0}
+figcaption{margin-top:10px;opacity:.65}
+
+.dark{background:var(--green);color:var(--cream);border-top:0}
+.dark .sec-head .cap{color:#C9B49A}
+.wine{background:var(--wine);color:var(--cream);border-top:0}
+.wine .sec-head .cap{color:#E2BFB3}
+
+.body .swatches{list-style:none;padding:0;margin:0 0 26px;border-top:1px solid var(--line)}
+.swatches li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);margin:0}
+.sw{height:56px;border:1px solid var(--line)}
+.swatches b{font:400 20px/1.2 var(--serif)}
+.swatches code{font:500 12px var(--sans);opacity:.6;margin-left:8px}
+.swatches span{display:block;font-size:15px;color:var(--ink-2)}
+.type{display:grid;gap:14px;margin:0 0 22px}
+.type>div{border-top:1px solid var(--ink);padding-top:14px}
+.type .spec{line-height:1;margin-bottom:12px}
+.type .s1{font:400 64px/1 var(--serif);letter-spacing:-.03em}
+.type .s1 i{color:var(--wine)}
+.type .s2{font:500 14px/1.3 var(--sans);letter-spacing:.24em;text-transform:uppercase;padding:18px 0}
+.type b{display:block;font-weight:600}
+.type span{font-size:15px;color:var(--ink-2)}
+
+.mech{list-style:none;margin:0;padding:0}
+.mech li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:20px 0;border-top:1px solid rgba(239,230,218,.22);margin:0}
+.mech li:last-child{border-bottom:1px solid rgba(239,230,218,.22)}
+.mech .n{font:italic 400 24px/1 var(--serif);color:#C9B49A}
+.mech b{display:block;font:400 clamp(22px,2.4vw,28px)/1.2 var(--serif);margin-bottom:6px}
+.mech span{opacity:.82;font-size:16px}
+
+.phones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px;margin-top:28px}
+.phones figure{margin:0}
+.phone{border:6px solid var(--ink);border-radius:26px;overflow:hidden;background:var(--ink)}
+.desks{display:grid;gap:22px;margin-top:28px}
+.desks figure{margin:0}
+.note{border:1px solid var(--line);padding:16px 18px;font-size:15px;color:var(--ink-2);margin:22px 0 0}
+
+.cta-end{text-align:center;padding-block:80px}
+.cta-end h2{font:italic 400 clamp(38px,7vw,76px)/1 var(--serif);color:var(--wine);margin:0 0 30px}
+.cta-end .btn{display:inline-flex}
+footer{padding-block:26px 44px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-2)}
+footer p{margin:4px 0}
+
+@media (min-width:760px){
+  .wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}
+  .hero{padding-block:56px 64px}
+  .btns{flex-direction:row}
+  .facts{grid-template-columns:repeat(4,minmax(0,1fr))}
+  section{padding-block:96px}
+  .sec{grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:56px}
+  .sec-head{position:sticky;top:28px;align-self:start}
+  .type{grid-template-columns:1fr 1fr;gap:30px}
+  .phones{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 22px}
+  .desks{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#"><img src="favicon.svg" alt="" width="26" height="31">CATARSIS</a>
+    <a class="cap" href="journal/">Відкрити журнал</a>
+  </header>
+</div>
+
+<main>
+  <div class="wrap hero">
+    <p class="cap" style="margin:0 0 18px;opacity:.65">Кейс</p>
+    <h1>CATARSIS</h1>
+    <p class="lead">Сайт жіночого освітнього клубу, зібраний як перший номер глянцевого журналу.</p>
+    <div class="btns"><a class="btn btn-main" href="journal/">Відкрити журнал</a></div>
+    <dl class="facts">
+      <div><dt class="cap">Формат</dt><dd>Концепт для портфоліо</dd></div>
+      <div><dt class="cap">Що зроблено</dt><dd>Айдентика, тексти, сайт на&nbsp;11&nbsp;розворотів</dd></div>
+      <div><dt class="cap">Інструменти</dt><dd>HTML, CSS, JavaScript, SVG</dd></div>
+      <div><dt class="cap">Екрани</dt><dd>Від 360 до&nbsp;1440&nbsp;px</dd></div>
+    </dl>
+    <figure class="shot"><img src="img/cover-d.jpg" alt="Обкладинка журналу CATARSIS: великий бордовий мастхед і фото засновниць" width="1440" height="900"></figure>
+  </div>
+
+  <section>
+    <div class="wrap sec">
+      <div class="sec-head"><span class="cap">01 · Задача</span><h2>Не ще один <em>курс</em></h2></div>
+      <div class="body">
+        <p class="big">Клуб збирає жінок довкола лекцій і&nbsp;практик про тіло, стосунки, самоцінність і&nbsp;внутрішню опору. Членство тут&nbsp;— привілей, а&nbsp;не підписка.</p>
+        <p>Сайти курсів і&nbsp;клубів зазвичай побудовані однаково: «біль, програма, ціна, кнопка». Для закритого кола, куди «не&nbsp;потрапляють випадково», такий формат знецінює саму ідею. Сайт мав відчуватися як річ, яку хочеться тримати в&nbsp;руках, і&nbsp;м'яко вести до&nbsp;анкети.</p>
+        <p class="note">Концепт: бренд, тексти, людей на&nbsp;фото й&nbsp;події вигадано, анкети на&nbsp;сайті демонстраційні.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap sec">
+      <div class="sec-head"><span class="cap">02 · Ідея</span><h2>Сайт&nbsp;— це <em>Issue 01</em></h2></div>
+      <div class="body">
+        <p>Кожен розділ сайту оформлено як частину журналу, а&nbsp;не як «блок лендингу»:</p>
+        <ul>
+          <li><b>обкладинка</b> з&nbsp;мастхедом, анонсами номера й&nbsp;штрихкодом;</li>
+          <li><b>зміст</b> з&nbsp;номерами сторінок, і&nbsp;на&nbsp;кожному розвороті є колонтитул із&nbsp;номером сторінки;</li>
+          <li><b>лист редактора</b>, рубрики Education, Mindset, Community, героїні номера, світська хроніка;</li>
+          <li><b>«вибір редакції»</b>&nbsp;— бутік, де нічого не продається за&nbsp;гроші;</li>
+          <li><b>членство</b> замість кнопки «купити»: анкета, яку читають особисто.</li>
+        </ul>
+        <figure><img src="img/toc-d.jpg" alt="Зміст номера з номерами сторінок" width="1440" height="900" loading="lazy"><figcaption>Зміст номера: кожен рядок веде на&nbsp;свій розворот.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap sec">
+      <div class="sec-head"><span class="cap">03 · Айдентика</span><h2>Матовий папір, <em>зелень і&nbsp;бордо</em></h2></div>
+      <div class="body">
+        <p>Палітра світла, як у&nbsp;друкованому виданні: основа&nbsp;— папір, а&nbsp;темні кольори займають цілі розвороти, як вклейки в&nbsp;журналі. Поверх усієї сторінки лежить ледь помітне зерно паперу.</p>
+        <ul class="swatches">
+          <li><span class="sw" style="background:var(--paper)"></span><div><b>Папір <code>#ECE3D6</code></b><span>Основні сторінки: зміст, лист редактора, героїні, бутік.</span></div></li>
+          <li><span class="sw" style="background:var(--green)"></span><div><b>Зелень <code>#2F3328</code></b><span>Розвороти про освіту й&nbsp;хроніку.</span></div></li>
+          <li><span class="sw" style="background:var(--wine)"></span><div><b>Бордо <code>#4A1320</code></b><span>Коло й&nbsp;членство, мастхед, акценти.</span></div></li>
+          <li><span class="sw" style="background:var(--ink)"></span><div><b>Чорнило <code>#1B1716</code></b><span>Текст і&nbsp;таємний поверх.</span></div></li>
+        </ul>
+        <div class="type">
+          <div><div class="spec s1">Аа <i>Аа</i></div><b>Playfair Display</b><span>Високий контраст, як у&nbsp;модних журналах. Рубрики набрано на&nbsp;всю ширину екрана, курсив працює як голос редакції.</span></div>
+          <div><div class="spec s2">Issue 01 · Осінь</div><b>Manrope</b><span>Дрібні підписи з&nbsp;розрядкою: колонтитули, номери сторінок, кредити фото.</span></div>
+        </div>
+        <p><b>Монограма.</b> Змія одним рухом складається в&nbsp;літери C і&nbsp;S: CATARSIS і&nbsp;SIS, так у&nbsp;клубі називають своїх. Монограма живе в&nbsp;правому нижньому куті як закладка й&nbsp;змінює колір під&nbsp;розворот.</p>
+        <figure><img src="img/intro.jpg" alt="Три кадри інтро: змія вповзає, згортається й стає монограмою CS" width="1480" height="600" loading="lazy"><figcaption>Інтро: змія вповзає на&nbsp;сторінку й&nbsp;згортається в&nbsp;монограму.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="wrap sec">
+      <div class="sec-head"><span class="cap">04 · Механіки</span><h2>Сайт, який <em>гортають</em></h2></div>
+      <div class="body">
+        <ol class="mech">
+          <li><span class="n">i</span><div><b>Інтро зі змією</b><span>Змія вповзає на&nbsp;екран, згортається в&nbsp;монограму, а&nbsp;потім та відлітає в&nbsp;кут і&nbsp;стає закладкою: клік повертає на&nbsp;обкладинку. Інтро можна пропустити, а&nbsp;з&nbsp;увімкненим «зменшити анімацію» його немає.</span></div></li>
+          <li><span class="n">ii</span><div><b>Перегортання кольору</b><span>Під&nbsp;час прокрутки фон плавно перетікає з&nbsp;паперу в&nbsp;зелень і&nbsp;бордо. Кольори змішуються в&nbsp;просторі OKLab, тому між ними немає брудних сіро-коричневих відтінків.</span></div></li>
+          <li><span class="n">iii</span><div><b>Поява тексту й&nbsp;фото</b><span>Рядки заголовків виїжджають знизу по&nbsp;черзі, фото відкриваються «шторкою». Лише при першій появі на&nbsp;екрані.</span></div></li>
+          <li><span class="n">iv</span><div><b>Монета SI-POINTS</b><span>Валюта клубу у&nbsp;вигляді об'ємної монети з&nbsp;монограмою. При наведенні вона перевертається, тінь стискається, як у&nbsp;справжньої монети.</span></div></li>
+          <li><span class="n">v</span><div><b>Таємний поверх</b><span>Долистайте до&nbsp;підвалу й&nbsp;«постукайте» прокруткою тричі: напис тріскається, літери падають, відкривається таємний вхід із&nbsp;бонусом +50 SI-POINTS. На&nbsp;телефоні стуки віддаються вібрацією.</span></div></li>
+          <li><span class="n">vi</span><div><b>Меню-зміст</b><span>На&nbsp;телефоні меню відкривається як сторінка змісту з&nbsp;номерами сторінок.</span></div></li>
+        </ol>
+        <div class="desks">
+          <figure><img src="img/boutique-d.jpg" alt="Бутік з монетою SI-POINTS" width="1440" height="900" loading="lazy"><figcaption>Бутік і&nbsp;монета SI-POINTS.</figcaption></figure>
+          <figure><img src="img/secret-d.jpg" alt="Таємний поверх: Sis, тссс… +50" width="1440" height="900" loading="lazy"><figcaption>Таємний поверх під&nbsp;підвалом.</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wine">
+    <div class="wrap sec">
+      <div class="sec-head"><span class="cap">05 · Тексти</span><h2>Голос <em>редакції</em></h2></div>
+      <div class="body">
+        <p>Тексти написані як журнал, а&nbsp;не як продаж: лист редактора-маніфест, рубрики з&nbsp;підзаголовками-цитатами, короткі підписи до&nbsp;фото. Сім сфер освіти пов'язано з&nbsp;чакральною системою&nbsp;— від тілесності до&nbsp;внутрішньої опори, знизу вгору.</p>
+        <p>Місця для живих інтерв'ю й&nbsp;анонсів позначено як заготовки: клуб заповнює їх сам, дизайн від цього не&nbsp;ламається.</p>
+        <figure><img src="img/spheres-d.jpg" alt="Сім сфер: від тілесності до внутрішньої опори" width="1440" height="900" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap sec">
+      <div class="sec-head"><span class="cap">06 · Розвороти</span><h2>Номер <em>цілком</em></h2></div>
+      <div class="body">
+        <div class="desks">
+          <figure><img src="img/letter-d.jpg" alt="Лист редактора" width="1440" height="900" loading="lazy"><figcaption>Лист редактора</figcaption></figure>
+          <figure><img src="img/edu-d.jpg" alt="Розворот Education" width="1440" height="900" loading="lazy"><figcaption>Education</figcaption></figure>
+          <figure><img src="img/community-d.jpg" alt="Розворот Community" width="1440" height="900" loading="lazy"><figcaption>Community</figcaption></figure>
+          <figure><img src="img/stories-d.jpg" alt="Героїні номера" width="1440" height="900" loading="lazy"><figcaption>Героїні номера</figcaption></figure>
+          <figure><img src="img/chron-d.jpg" alt="Світська хроніка" width="1440" height="900" loading="lazy"><figcaption>Світська хроніка</figcaption></figure>
+          <figure><img src="img/member-d.jpg" alt="Членство" width="1440" height="900" loading="lazy"><figcaption>Членство</figcaption></figure>
+        </div>
+        <div class="phones">
+          <figure><div class="phone"><img src="img/cover-m.jpg" alt="Обкладинка на телефоні" width="780" height="1688" loading="lazy"></div><figcaption>Обкладинка</figcaption></figure>
+          <figure><div class="phone"><img src="img/menu-m.jpg" alt="Меню-зміст на телефоні" width="780" height="1688" loading="lazy"></div><figcaption>Меню-зміст</figcaption></figure>
+          <figure><div class="phone"><img src="img/spheres-m.jpg" alt="Сім сфер на телефоні" width="780" height="1688" loading="lazy"></div><figcaption>Сім сфер</figcaption></figure>
+          <figure><div class="phone"><img src="img/status-m.jpg" alt="Статус SIS на телефоні" width="780" height="1688" loading="lazy"></div><figcaption>Статус SIS</figcaption></figure>
+          <figure><div class="phone"><img src="img/coin-m.jpg" alt="Монета SI-POINTS на телефоні" width="780" height="1688" loading="lazy"></div><figcaption>Монета SI-POINTS</figcaption></figure>
+          <figure><div class="phone"><img src="img/form-m.jpg" alt="Анкета членства на телефоні" width="780" height="1688" loading="lazy"></div><figcaption>Анкета</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap sec">
+      <div class="sec-head"><span class="cap">07 · Технічно</span><h2>Під <em>обкладинкою</em></h2></div>
+      <div class="body">
+        <ul>
+          <li>Чистий HTML, CSS і&nbsp;JavaScript, без бібліотек і&nbsp;конструкторів. Інтро, монета й&nbsp;тріщини намальовані в&nbsp;SVG.</li>
+          <li>Сторінка важить близько 165&nbsp;КБ коду, фото винесено окремими файлами й&nbsp;вантажаться ліниво, коли до&nbsp;них доходить прокрутка.</li>
+          <li>Сітка на&nbsp;12 колонок з&nbsp;асиметричною версткою: текст заходить на&nbsp;фото, як у&nbsp;журналі. На&nbsp;телефоні вона перебудовується в&nbsp;одну-дві колонки.</li>
+          <li>Анкети перевіряють поля й&nbsp;підказують, чого бракує.</li>
+          <li>Налаштування «зменшити анімацію» вимикає інтро й&nbsp;рух, сторінка лишається повністю робочою.</li>
+        </ul>
+        <p><b>Що потрібно для справжнього запуску:</b> підключити анкети до&nbsp;Telegram або CRM, додати справжні фото й&nbsp;інтерв'ю героїнь, анонси подій і&nbsp;правила нарахування SI-POINTS.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap cta-end">
+    <h2>Читай повільно</h2>
+    <a class="btn btn-main" href="journal/">Відкрити Issue 01</a>
+  </div>
+</main>
+
+<div class="wrap">
+  <footer>
+    <p>Дизайн, тексти й&nbsp;розробка&nbsp;— Антон Зінченко, 2026.</p>
+    <p>Бренд CATARSIS, люди на&nbsp;фото й&nbsp;події вигадані.</p>
+  </footer>
+</div>
+</body>
+</html>
